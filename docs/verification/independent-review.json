@@ -1,0 +1,26 @@
+{
+  "review_id": "FINAL",
+  "reviewed_at_utc": "2026-10-08T01:49:58.699749+00:00",
+  "summary": "Whole repository independently accepted for the agreed local MVP.",
+  "assertions": "40 meaningful tests pass. Eight fresh documented CLI commands pass expected exits: validation/reference/compare/adapter 0, strict aggregate comparison 1 and three fixed fault demos 1. Reference 16 scenarios/87 checks/36 tasks/28 positive answers/8 abstentions, zero mandatory violations, 61 search/54 get reads and two actual reopens. Policy task totals33/31/34/36; failed baselines remain false. Every check references observed read traces; each injected fault has two named path violations, clean and positive controls pass, input hashes preserved.",
+  "inspection": "Main inspected store, tenant/time tools, four policy selection/retention paths, runner/reopen/independent scorer, public trusted-adapter API and fixed faults. Reviewed architecture/suite/adapter/report/contribution/limits, MIT/runtime/research/action attribution, evidence/recorded examples and prepared CI. Immutable pins/read-only checkout/3.11.9/Windows+Linux/no paid calls checked. Full and original smoke fixture hashes preserved.",
+  "limitations": "Accepted agreed local MVP on Windows/CPython3.11.9 with deterministic mocks. Hosted CI/Linux/POSIX/live-model/provider/production/security/performance execution remains unexecuted or outside scope. CI is prepared/reviewed, not reported as hosted success. Supported read exclusion/tombstones are not physical erasure. Synthetic gold is not policy superiority; custom adapters are synchronous trusted code without isolation/timeouts. Connection reopen is not crash/distributed recovery. Existing files may be untracked; exact source manifest retained.",
+  "source_file_count": 37,
+  "status": "passed",
+  "repository": "agent-memory-lifecycle-bench",
+  "scope": "Coordinating-agent review, separate from implementation worker; not third-party certification.",
+  "local_path_redaction": "Personal host prefixes replaced. Original receipt hashes below describe the unredacted local source; exports have separate hashes.",
+  "publication_change_scope": "README/AGENTS/contributor/context/evidence exports and ignore/attribute portability only. Runtime, tests, fixtures and dependency pins remain as accepted.",
+  "command_receipt_exports": [
+    {
+      "path": "docs/verification/main-command-00-final-main-tests.json",
+      "source_receipt_sha256": "613bfd76c276e2709c942cb31d2027dc0cb30a05b56c360f99ed9c7c8e2cf195",
+      "export_sha256": "c511f5163808d9eb22827051347b7f4ef5ac8cbd794786948fb0526b6cd16921"
+    },
+    {
+      "path": "docs/verification/main-command-01-final-main-cli.json",
+      "source_receipt_sha256": "aeb4584715dbdb4360dda67d0a9c8a1439f4f83dc61751cae0b4a21839094a69",
+      "export_sha256": "97b9c7cfe59c2221ed84ea67df8e51258c93068550de134821fe862b61e13b33"
+    }
+  ]
+}

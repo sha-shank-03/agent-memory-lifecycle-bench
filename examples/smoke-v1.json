@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "smoke-v1",
+  "fictional": true,
+  "scenarios": [
+    {
+      "id": "retained-preference",
+      "category": "retention",
+      "events": [
+        {"op": "put", "at": 0, "tenant": "northwind", "memory": {"id": "mira-channel", "subject": "fictional-mira", "key": "contact-channel", "value": "email", "recorded_at": 0, "effective_at": 0, "expires_at": null, "source": "authored fictional preference"}},
+        {"op": "query", "at": 1, "tenant": "northwind", "id": "recent-preference", "task": {"subject": "fictional-mira", "key": "contact-channel", "description": "Which channel should the fictional support assistant use to contact Mira?"}, "expected": {"status": "answer", "value": "email", "evidence_ids": ["mira-channel"]}},
+        {"op": "query", "at": 2592000, "tenant": "northwind", "id": "preference-after-thirty-days", "task": {"subject": "fictional-mira", "key": "contact-channel", "description": "Which channel should be used thirty simulated days later?"}, "expected": {"status": "answer", "value": "email", "evidence_ids": ["mira-channel"]}},
+        {"op": "probe", "at": 2592000, "tenant": "northwind", "id": "retained-search", "path": "search", "inputs": {"subject": "fictional-mira", "key": "contact-channel"}, "expected_ids": ["mira-channel"], "reason": "present"},
+        {"op": "probe", "at": 2592000, "tenant": "northwind", "id": "retained-get", "path": "get", "inputs": {"memory_id": "mira-channel"}, "expected_ids": ["mira-channel"], "reason": "present"}
+      ]
+    },
+    {
+      "id": "trial-expiration",
+      "category": "expiration",
+      "events": [
+        {"op": "put", "at": 0, "tenant": "northwind", "memory": {"id": "trial-route", "subject": "fictional-ticket-42", "key": "support-queue", "value": "trial-support", "recorded_at": 0, "effective_at": 0, "expires_at": 10, "source": "authored fictional trial routing"}},
+        {"op": "query", "at": 9, "tenant": "northwind", "id": "route-before-expiry", "task": {"subject": "fictional-ticket-42", "key": "support-queue", "description": "Which support queue applies before the fictional trial route expires?"}, "expected": {"status": "answer", "value": "trial-support", "evidence_ids": ["trial-route"]}},
+        {"op": "probe", "at": 9, "tenant": "northwind", "id": "before-expiry-search", "path": "search", "inputs": {"subject": "fictional-ticket-42", "key": "support-queue"}, "expected_ids": ["trial-route"], "reason": "present"},
+        {"op": "probe", "at": 9, "tenant": "northwind", "id": "before-expiry-get", "path": "get", "inputs": {"memory_id": "trial-route"}, "expected_ids": ["trial-route"], "reason": "present"},
+        {"op": "query", "at": 10, "tenant": "northwind", "id": "route-at-expiry", "task": {"subject": "fictional-ticket-42", "key": "support-queue", "description": "Which support queue is supported by active memory at the exact expiry boundary?"}, "expected": {"status": "unknown", "value": null, "evidence_ids": []}},
+        {"op": "probe", "at": 10, "tenant": "northwind", "id": "at-expiry-search", "path": "search", "inputs": {"subject": "fictional-ticket-42", "key": "support-queue"}, "expected_ids": [], "reason": "expired"},
+        {"op": "probe", "at": 10, "tenant": "northwind", "id": "at-expiry-get", "path": "get", "inputs": {"memory_id": "trial-route"}, "expected_ids": [], "reason": "expired"},
+        {"op": "probe", "at": 11, "tenant": "northwind", "id": "after-expiry-search", "path": "search", "inputs": {"subject": "fictional-ticket-42", "key": "support-queue"}, "expected_ids": [], "reason": "expired"},
+        {"op": "probe", "at": 11, "tenant": "northwind", "id": "after-expiry-get", "path": "get", "inputs": {"memory_id": "trial-route"}, "expected_ids": [], "reason": "expired"}
+      ]
+    },
+    {
+      "id": "forgotten-callback",
+      "category": "deletion",
+      "events": [
+        {"op": "put", "at": 0, "tenant": "eastwind", "memory": {"id": "noah-callback", "subject": "fictional-noah", "key": "callback-channel", "value": "voice", "recorded_at": 0, "effective_at": 0, "expires_at": null, "source": "authored fictional callback request"}},
+        {"op": "query", "at": 1, "tenant": "eastwind", "id": "callback-before-delete", "task": {"subject": "fictional-noah", "key": "callback-channel", "description": "Which callback channel has fictional Noah requested?"}, "expected": {"status": "answer", "value": "voice", "evidence_ids": ["noah-callback"]}},
+        {"op": "probe", "at": 1, "tenant": "eastwind", "id": "before-delete-search", "path": "search", "inputs": {"subject": "fictional-noah", "key": "callback-channel"}, "expected_ids": ["noah-callback"], "reason": "present"},
+        {"op": "probe", "at": 1, "tenant": "eastwind", "id": "before-delete-get", "path": "get", "inputs": {"memory_id": "noah-callback"}, "expected_ids": ["noah-callback"], "reason": "present"},
+        {"op": "delete", "at": 2, "tenant": "eastwind", "memory_id": "noah-callback"},
+        {"op": "query", "at": 2, "tenant": "eastwind", "id": "callback-after-delete", "task": {"subject": "fictional-noah", "key": "callback-channel", "description": "Which callback channel remains retrievable after forgetting that request?"}, "expected": {"status": "unknown", "value": null, "evidence_ids": []}},
+        {"op": "probe", "at": 2, "tenant": "eastwind", "id": "at-delete-search", "path": "search", "inputs": {"subject": "fictional-noah", "key": "callback-channel"}, "expected_ids": [], "reason": "deleted"},
+        {"op": "probe", "at": 2, "tenant": "eastwind", "id": "at-delete-get", "path": "get", "inputs": {"memory_id": "noah-callback"}, "expected_ids": [], "reason": "deleted"},
+        {"op": "probe", "at": 3, "tenant": "eastwind", "id": "after-delete-search", "path": "search", "inputs": {"subject": "fictional-noah", "key": "callback-channel"}, "expected_ids": [], "reason": "deleted"},
+        {"op": "probe", "at": 3, "tenant": "eastwind", "id": "after-delete-get", "path": "get", "inputs": {"memory_id": "noah-callback"}, "expected_ids": [], "reason": "deleted"}
+      ]
+    },
+    {
+      "id": "shared-id-tenant-separation",
+      "category": "tenant",
+      "events": [
+        {"op": "put", "at": 0, "tenant": "northwind", "memory": {"id": "shared-route", "subject": "fictional-ava", "key": "support-queue", "value": "north-queue", "recorded_at": 0, "effective_at": 0, "expires_at": null, "source": "authored fictional north tenant route"}},
+        {"op": "put", "at": 0, "tenant": "southwind", "memory": {"id": "shared-route", "subject": "fictional-ava", "key": "support-queue", "value": "south-queue", "recorded_at": 0, "effective_at": 0, "expires_at": null, "source": "authored fictional south tenant route"}},
+        {"op": "query", "at": 1, "tenant": "northwind", "id": "north-tenant-route", "task": {"subject": "fictional-ava", "key": "support-queue", "description": "Which queue belongs to fictional Ava in the north tenant?"}, "expected": {"status": "answer", "value": "north-queue", "evidence_ids": ["shared-route"]}},
+        {"op": "query", "at": 1, "tenant": "southwind", "id": "south-tenant-route", "task": {"subject": "fictional-ava", "key": "support-queue", "description": "Which queue belongs to fictional Ava in the south tenant?"}, "expected": {"status": "answer", "value": "south-queue", "evidence_ids": ["shared-route"]}},
+        {"op": "probe", "at": 1, "tenant": "westwind", "id": "foreign-id-get", "path": "get", "inputs": {"memory_id": "shared-route"}, "expected_ids": [], "reason": "tenant"},
+        {"op": "probe", "at": 1, "tenant": "westwind", "id": "foreign-subject-search", "path": "search", "inputs": {"subject": "fictional-ava", "key": "support-queue"}, "expected_ids": [], "reason": "tenant"},
+        {"op": "delete", "at": 2, "tenant": "northwind", "memory_id": "shared-route"},
+        {"op": "query", "at": 2, "tenant": "southwind", "id": "south-route-after-north-delete", "task": {"subject": "fictional-ava", "key": "support-queue", "description": "Which south tenant queue remains after the north tenant deletes its shared ID?"}, "expected": {"status": "answer", "value": "south-queue", "evidence_ids": ["shared-route"]}},
+        {"op": "probe", "at": 2, "tenant": "northwind", "id": "north-deleted-get", "path": "get", "inputs": {"memory_id": "shared-route"}, "expected_ids": [], "reason": "deleted"},
+        {"op": "probe", "at": 2, "tenant": "northwind", "id": "north-deleted-search", "path": "search", "inputs": {"subject": "fictional-ava", "key": "support-queue"}, "expected_ids": [], "reason": "deleted"}
+      ]
+    }
+  ]
+}

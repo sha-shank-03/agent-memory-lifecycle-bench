@@ -1,0 +1,18 @@
+{
+  "slug": "agent-memory-lifecycle-bench",
+  "label": "final-main-cli",
+  "argv": [
+    "py",
+    "-3.11",
+    "<local-coordination>\\main_final_cli_review_20261008.py",
+    "agent-memory-lifecycle-bench"
+  ],
+  "cwd": "<local-portfolio>\\agent-memory-lifecycle-bench",
+  "started_at_utc": "2026-10-08T01:47:46.813220+00:00",
+  "duration_seconds": 9.688,
+  "exit_code": 0,
+  "timed_out": false,
+  "stdout": "{\"passed\": true, \"assertions\": [\"validate: actual exit 0\", \"reference: actual exit 0\", \"Reference has sixteen scenarios, 87/87 checks and 36/36 tasks\", \"Positive usefulness, abstention, zero lifecycle violations and two actual reopens\", \"Both mandatory supported paths exercised\", \"All reference checks link to actual read trace IDs\", \"compare: actual exit 0\", \"Comparison completion preserves failed baseline aggregate and source digest\", \"Independent literal four-policy task comparison\", \"All four configurations honor mandatory lifecycle contracts\", \"compare-strict: actual exit 1\", \"expired-get: actual exit 1\", \"expired-get: benchmark stays failed while clean/positive controls pass\", \"expired-get: two concrete intended path violations\", \"expired-get: actual clean/fault/input digests match\", \"deleted-search: actual exit 1\", \"deleted-search: benchmark stays failed while clean/positive controls pass\", \"deleted-search: two concrete intended path violations\", \"deleted-search: actual clean/fault/input digests match\", \"tenant-search: actual exit 1\", \"tenant-search: benchmark stays failed while clean/positive controls pass\", \"tenant-search: two concrete intended path violations\", \"tenant-search: actual clean/fault/input digests match\", \"adapter: actual exit 0\", \"Documented trusted adapter uses supported reads and passes full task suite\", \"Full and original smoke fixture bytes preserved\", \"Standalone local Git repository exists\", \"MIT license contains grant and warranty limitation\", \"CI action references use immutable 40-character commits\", \"CI has read-only checkout, pinned runtime and bounded job\", \"CI includes Windows/Linux without secret/deployment/push steps\", \"CI runs meaningful local unit suite\", \"CI pins match verified Memory research/attribution\", \"CI/demo assertion entry exists\", \"Architecture/contracts/limitations/license attribution/evidence and recorded example docs present\"], \"command_count\": 8, \"reviewed_at_utc\": \"2026-10-08T01:47:56.492606+00:00\", \"limitations\": \"Local Windows mocked execution. Hosted CI/Linux/POSIX/live-model/provider/production/security/performance guarantees unexecuted or outside agreed MVP.\"}\n",
+  "stderr": "",
+  "scope": "independently executed by main; result alone does not imply full acceptance"
+}

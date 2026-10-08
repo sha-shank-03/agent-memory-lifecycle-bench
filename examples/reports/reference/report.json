@@ -1,0 +1,2578 @@
+{
+  "adapter": "SQLiteStore",
+  "categories": {
+    "conflict": {
+      "probe": {
+        "passed": 7,
+        "total": 7
+      },
+      "task": {
+        "passed": 4,
+        "total": 4
+      }
+    },
+    "deletion": {
+      "probe": {
+        "passed": 14,
+        "total": 14
+      },
+      "task": {
+        "passed": 8,
+        "total": 8
+      }
+    },
+    "expiration": {
+      "probe": {
+        "passed": 14,
+        "total": 14
+      },
+      "task": {
+        "passed": 7,
+        "total": 7
+      }
+    },
+    "retention": {
+      "probe": {
+        "passed": 6,
+        "total": 6
+      },
+      "task": {
+        "passed": 4,
+        "total": 4
+      }
+    },
+    "stale": {
+      "probe": {
+        "passed": 2,
+        "total": 2
+      },
+      "task": {
+        "passed": 6,
+        "total": 6
+      }
+    },
+    "tenant": {
+      "probe": {
+        "passed": 8,
+        "total": 8
+      },
+      "task": {
+        "passed": 7,
+        "total": 7
+      }
+    }
+  },
+  "checks": [
+    {
+      "at": 1,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 1,
+      "expected": {
+        "evidence_ids": [
+          "mira-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "recent-preference",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "mira-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "retained-preference",
+      "task": {
+        "description": "Which channel should the fictional support assistant use to contact Mira?",
+        "key": "contact-channel",
+        "subject": "fictional-mira"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "retained-preference.e1.r0",
+        "retained-preference.e1.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 2592000,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected": {
+        "evidence_ids": [
+          "mira-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "preference-after-thirty-days",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "mira-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "retained-preference",
+      "task": {
+        "description": "Which channel should be used thirty simulated days later?",
+        "key": "contact-channel",
+        "subject": "fictional-mira"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "retained-preference.e2.r0",
+        "retained-preference.e2.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 2592000,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "mira-channel"
+      ],
+      "failures": [],
+      "id": "retained-search",
+      "observed_ids": [
+        "mira-channel"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "retained-preference",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "retained-preference.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 2592000,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected_ids": [
+        "mira-channel"
+      ],
+      "failures": [],
+      "id": "retained-get",
+      "observed_ids": [
+        "mira-channel"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "retained-preference",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "retained-preference.e4.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 604799,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 1,
+      "expected": {
+        "evidence_ids": [
+          "elin-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "before-window",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "elin-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "seven-day-boundary",
+      "task": {
+        "description": "Which fictional channel remains useful just before seven days?",
+        "key": "contact-channel",
+        "subject": "fictional-elin"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "seven-day-boundary.e1.r0",
+        "seven-day-boundary.e1.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 604799,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected_ids": [
+        "elin-channel"
+      ],
+      "failures": [],
+      "id": "before-window-search",
+      "observed_ids": [
+        "elin-channel"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "seven-day-boundary",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "seven-day-boundary.e2.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 604799,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "elin-channel"
+      ],
+      "failures": [],
+      "id": "before-window-get",
+      "observed_ids": [
+        "elin-channel"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "seven-day-boundary",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "seven-day-boundary.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 604800,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected": {
+        "evidence_ids": [
+          "elin-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "at-window",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "elin-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "seven-day-boundary",
+      "task": {
+        "description": "Which permanent preference is still true at seven days?",
+        "key": "contact-channel",
+        "subject": "fictional-elin"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "seven-day-boundary.e4.r0",
+        "seven-day-boundary.e4.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 604800,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 5,
+      "expected_ids": [
+        "elin-channel"
+      ],
+      "failures": [],
+      "id": "at-window-search",
+      "observed_ids": [
+        "elin-channel"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "seven-day-boundary",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "seven-day-boundary.e5.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 604800,
+      "category": "retention",
+      "contract_violations": [],
+      "event_index": 6,
+      "expected_ids": [
+        "elin-channel"
+      ],
+      "failures": [],
+      "id": "at-window-get",
+      "observed_ids": [
+        "elin-channel"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "seven-day-boundary",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "seven-day-boundary.e6.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 9,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 1,
+      "expected": {
+        "evidence_ids": [
+          "trial-route"
+        ],
+        "status": "answer",
+        "value": "trial-support"
+      },
+      "failures": [],
+      "id": "route-before-expiry",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "trial-route"
+        ],
+        "status": "answer",
+        "value": "trial-support"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "trial-expiration",
+      "task": {
+        "description": "Which support queue applies before the fictional trial route expires?",
+        "key": "support-queue",
+        "subject": "fictional-ticket-42"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "trial-expiration.e1.r0",
+        "trial-expiration.e1.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 9,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected_ids": [
+        "trial-route"
+      ],
+      "failures": [],
+      "id": "before-expiry-search",
+      "observed_ids": [
+        "trial-route"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "trial-expiration",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "trial-expiration.e2.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 9,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "trial-route"
+      ],
+      "failures": [],
+      "id": "before-expiry-get",
+      "observed_ids": [
+        "trial-route"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "trial-expiration",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "trial-expiration.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected": {
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "failures": [],
+      "id": "route-at-expiry",
+      "observed": {
+        "error": null,
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "trial-expiration",
+      "task": {
+        "description": "Which support queue is supported by active memory at the exact expiry boundary?",
+        "key": "support-queue",
+        "subject": "fictional-ticket-42"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "trial-expiration.e4.r0"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 5,
+      "expected_ids": [],
+      "failures": [],
+      "id": "at-expiry-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "expired",
+      "retention_excluded_ids": [],
+      "scenario": "trial-expiration",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "trial-expiration.e5.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 6,
+      "expected_ids": [],
+      "failures": [],
+      "id": "at-expiry-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "expired",
+      "retention_excluded_ids": [],
+      "scenario": "trial-expiration",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "trial-expiration.e6.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 11,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 7,
+      "expected_ids": [],
+      "failures": [],
+      "id": "after-expiry-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "expired",
+      "retention_excluded_ids": [],
+      "scenario": "trial-expiration",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "trial-expiration.e7.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 11,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 8,
+      "expected_ids": [],
+      "failures": [],
+      "id": "after-expiry-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "expired",
+      "retention_excluded_ids": [],
+      "scenario": "trial-expiration",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "trial-expiration.e8.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 9,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected": {
+        "evidence_ids": [
+          "reopen-trial"
+        ],
+        "status": "answer",
+        "value": "trial-support"
+      },
+      "failures": [],
+      "id": "before-cold-expiry",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "reopen-trial"
+        ],
+        "status": "answer",
+        "value": "trial-support"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "expiry-after-reopen",
+      "task": {
+        "description": "Which trial queue applies before reopening the store?",
+        "key": "temporary-queue",
+        "subject": "fictional-case-expiry"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-after-reopen.e2.r0",
+        "expiry-after-reopen.e2.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 9,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "reopen-trial"
+      ],
+      "failures": [],
+      "id": "before-cold-expiry-search",
+      "observed_ids": [
+        "reopen-trial"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "expiry-after-reopen",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-after-reopen.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 9,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected_ids": [
+        "reopen-trial"
+      ],
+      "failures": [],
+      "id": "before-cold-expiry-get",
+      "observed_ids": [
+        "reopen-trial"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "expiry-after-reopen",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-after-reopen.e4.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 6,
+      "expected": {
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "failures": [],
+      "id": "cold-expired",
+      "observed": {
+        "error": null,
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "expiry-after-reopen",
+      "task": {
+        "description": "Which active temporary queue survives exact expiry?",
+        "key": "temporary-queue",
+        "subject": "fictional-case-expiry"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-after-reopen.e6.r0"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 7,
+      "expected_ids": [],
+      "failures": [],
+      "id": "cold-expired-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "expired",
+      "retention_excluded_ids": [],
+      "scenario": "expiry-after-reopen",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-after-reopen.e7.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 8,
+      "expected_ids": [],
+      "failures": [],
+      "id": "cold-expired-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "expired",
+      "retention_excluded_ids": [],
+      "scenario": "expiry-after-reopen",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-after-reopen.e8.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 9,
+      "expected": {
+        "evidence_ids": [
+          "reopen-permanent"
+        ],
+        "status": "answer",
+        "value": "core-support"
+      },
+      "failures": [],
+      "id": "cold-positive",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "reopen-permanent"
+        ],
+        "status": "answer",
+        "value": "core-support"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "expiry-after-reopen",
+      "task": {
+        "description": "Which permanent queue proves the reopened store retained useful state?",
+        "key": "permanent-queue",
+        "subject": "fictional-case-expiry"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-after-reopen.e9.r0",
+        "expiry-after-reopen.e9.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 1,
+      "expected": {
+        "evidence_ids": [
+          "replayed-trial"
+        ],
+        "status": "answer",
+        "value": "trial-support"
+      },
+      "failures": [],
+      "id": "replay-positive",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "replayed-trial"
+        ],
+        "status": "answer",
+        "value": "trial-support"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "expiry-identical-replay",
+      "task": {
+        "description": "Which temporary queue can be retrieved before expiry?",
+        "key": "queue",
+        "subject": "fictional-case-replay"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-identical-replay.e1.r0",
+        "expiry-identical-replay.e1.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected_ids": [
+        "replayed-trial"
+      ],
+      "failures": [],
+      "id": "replay-positive-search",
+      "observed_ids": [
+        "replayed-trial"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "expiry-identical-replay",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-identical-replay.e2.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "replayed-trial"
+      ],
+      "failures": [],
+      "id": "replay-positive-get",
+      "observed_ids": [
+        "replayed-trial"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "expiry-identical-replay",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-identical-replay.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 5,
+      "expected": {
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "failures": [],
+      "id": "replay-expired",
+      "observed": {
+        "error": null,
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "expiry-identical-replay",
+      "task": {
+        "description": "Does identical delivery extend the original expiry?",
+        "key": "queue",
+        "subject": "fictional-case-replay"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-identical-replay.e5.r0"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 6,
+      "expected_ids": [],
+      "failures": [],
+      "id": "replay-expired-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "expired",
+      "retention_excluded_ids": [],
+      "scenario": "expiry-identical-replay",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-identical-replay.e6.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 10,
+      "category": "expiration",
+      "contract_violations": [],
+      "event_index": 7,
+      "expected_ids": [],
+      "failures": [],
+      "id": "replay-expired-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "expired",
+      "retention_excluded_ids": [],
+      "scenario": "expiry-identical-replay",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "expiry-identical-replay.e7.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 1,
+      "expected": {
+        "evidence_ids": [
+          "noah-callback"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "failures": [],
+      "id": "callback-before-delete",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "noah-callback"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "forgotten-callback",
+      "task": {
+        "description": "Which callback channel has fictional Noah requested?",
+        "key": "callback-channel",
+        "subject": "fictional-noah"
+      },
+      "tenant_id": "eastwind",
+      "trace_refs": [
+        "forgotten-callback.e1.r0",
+        "forgotten-callback.e1.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected_ids": [
+        "noah-callback"
+      ],
+      "failures": [],
+      "id": "before-delete-search",
+      "observed_ids": [
+        "noah-callback"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "forgotten-callback",
+      "tenant_id": "eastwind",
+      "trace_refs": [
+        "forgotten-callback.e2.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "noah-callback"
+      ],
+      "failures": [],
+      "id": "before-delete-get",
+      "observed_ids": [
+        "noah-callback"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "forgotten-callback",
+      "tenant_id": "eastwind",
+      "trace_refs": [
+        "forgotten-callback.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 2,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 5,
+      "expected": {
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "failures": [],
+      "id": "callback-after-delete",
+      "observed": {
+        "error": null,
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "forgotten-callback",
+      "task": {
+        "description": "Which callback channel remains retrievable after forgetting that request?",
+        "key": "callback-channel",
+        "subject": "fictional-noah"
+      },
+      "tenant_id": "eastwind",
+      "trace_refs": [
+        "forgotten-callback.e5.r0"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 2,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 6,
+      "expected_ids": [],
+      "failures": [],
+      "id": "at-delete-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "forgotten-callback",
+      "tenant_id": "eastwind",
+      "trace_refs": [
+        "forgotten-callback.e6.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 2,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 7,
+      "expected_ids": [],
+      "failures": [],
+      "id": "at-delete-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "forgotten-callback",
+      "tenant_id": "eastwind",
+      "trace_refs": [
+        "forgotten-callback.e7.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 3,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 8,
+      "expected_ids": [],
+      "failures": [],
+      "id": "after-delete-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "forgotten-callback",
+      "tenant_id": "eastwind",
+      "trace_refs": [
+        "forgotten-callback.e8.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 3,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 9,
+      "expected_ids": [],
+      "failures": [],
+      "id": "after-delete-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "forgotten-callback",
+      "tenant_id": "eastwind",
+      "trace_refs": [
+        "forgotten-callback.e9.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected": {
+        "evidence_ids": [
+          "cold-forgotten"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "failures": [],
+      "id": "cold-before-delete",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "cold-forgotten"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "deletion-after-reopen",
+      "task": {
+        "description": "Which callback channel exists before forgetting it?",
+        "key": "callback-channel",
+        "subject": "fictional-remo"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "deletion-after-reopen.e2.r0",
+        "deletion-after-reopen.e2.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "cold-forgotten"
+      ],
+      "failures": [],
+      "id": "cold-before-delete-search",
+      "observed_ids": [
+        "cold-forgotten"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "deletion-after-reopen",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "deletion-after-reopen.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected_ids": [
+        "cold-forgotten"
+      ],
+      "failures": [],
+      "id": "cold-before-delete-get",
+      "observed_ids": [
+        "cold-forgotten"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "deletion-after-reopen",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "deletion-after-reopen.e4.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 3,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 7,
+      "expected": {
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "failures": [],
+      "id": "cold-after-delete",
+      "observed": {
+        "error": null,
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "deletion-after-reopen",
+      "task": {
+        "description": "Does the reopened supported path still exclude the forgotten callback?",
+        "key": "callback-channel",
+        "subject": "fictional-remo"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "deletion-after-reopen.e7.r0"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 3,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 8,
+      "expected_ids": [],
+      "failures": [],
+      "id": "cold-after-delete-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "deletion-after-reopen",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "deletion-after-reopen.e8.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 3,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 9,
+      "expected_ids": [],
+      "failures": [],
+      "id": "cold-after-delete-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "deletion-after-reopen",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "deletion-after-reopen.e9.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 3,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 10,
+      "expected": {
+        "evidence_ids": [
+          "cold-kept"
+        ],
+        "status": "answer",
+        "value": "core-support"
+      },
+      "failures": [],
+      "id": "cold-kept-control",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "cold-kept"
+        ],
+        "status": "answer",
+        "value": "core-support"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "deletion-after-reopen",
+      "task": {
+        "description": "Which retained queue proves reopening did not simply empty the store?",
+        "key": "support-queue",
+        "subject": "fictional-remo"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "deletion-after-reopen.e10.r0",
+        "deletion-after-reopen.e10.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 1,
+      "expected": {
+        "evidence_ids": [
+          "old-callback"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "failures": [],
+      "id": "before-replayed-delete",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "old-callback"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "delete-idempotency-and-replay",
+      "task": {
+        "description": "Which fictional callback is available before deletion?",
+        "key": "callback-channel",
+        "subject": "fictional-lian"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "delete-idempotency-and-replay.e1.r0",
+        "delete-idempotency-and-replay.e1.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected_ids": [
+        "old-callback"
+      ],
+      "failures": [],
+      "id": "before-replayed-delete-search",
+      "observed_ids": [
+        "old-callback"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "delete-idempotency-and-replay",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "delete-idempotency-and-replay.e2.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "old-callback"
+      ],
+      "failures": [],
+      "id": "before-replayed-delete-get",
+      "observed_ids": [
+        "old-callback"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "delete-idempotency-and-replay",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "delete-idempotency-and-replay.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 3,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 7,
+      "expected": {
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "failures": [],
+      "id": "after-replayed-delete",
+      "observed": {
+        "error": null,
+        "evidence_ids": [],
+        "status": "unknown",
+        "value": null
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "delete-idempotency-and-replay",
+      "task": {
+        "description": "Can an identical replay resurrect the deleted identity?",
+        "key": "callback-channel",
+        "subject": "fictional-lian"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "delete-idempotency-and-replay.e7.r0"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 3,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 8,
+      "expected_ids": [],
+      "failures": [],
+      "id": "after-replayed-delete-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "delete-idempotency-and-replay",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "delete-idempotency-and-replay.e8.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 3,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 9,
+      "expected_ids": [],
+      "failures": [],
+      "id": "after-replayed-delete-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "delete-idempotency-and-replay",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "delete-idempotency-and-replay.e9.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 4,
+      "category": "deletion",
+      "contract_violations": [],
+      "event_index": 11,
+      "expected": {
+        "evidence_ids": [
+          "new-callback"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "legitimate-new-id",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "new-callback"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "delete-idempotency-and-replay",
+      "task": {
+        "description": "Which new legitimate request can be used without restoring the old identity?",
+        "key": "callback-channel",
+        "subject": "fictional-lian"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "delete-idempotency-and-replay.e11.r0",
+        "delete-idempotency-and-replay.e11.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected": {
+        "evidence_ids": [
+          "shared-route"
+        ],
+        "status": "answer",
+        "value": "north-queue"
+      },
+      "failures": [],
+      "id": "north-tenant-route",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "shared-route"
+        ],
+        "status": "answer",
+        "value": "north-queue"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "shared-id-tenant-separation",
+      "task": {
+        "description": "Which queue belongs to fictional Ava in the north tenant?",
+        "key": "support-queue",
+        "subject": "fictional-ava"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "shared-id-tenant-separation.e2.r0",
+        "shared-id-tenant-separation.e2.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected": {
+        "evidence_ids": [
+          "shared-route"
+        ],
+        "status": "answer",
+        "value": "south-queue"
+      },
+      "failures": [],
+      "id": "south-tenant-route",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "shared-route"
+        ],
+        "status": "answer",
+        "value": "south-queue"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "shared-id-tenant-separation",
+      "task": {
+        "description": "Which queue belongs to fictional Ava in the south tenant?",
+        "key": "support-queue",
+        "subject": "fictional-ava"
+      },
+      "tenant_id": "southwind",
+      "trace_refs": [
+        "shared-id-tenant-separation.e3.r0",
+        "shared-id-tenant-separation.e3.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected_ids": [
+        "shared-route"
+      ],
+      "failures": [],
+      "id": "north-positive-control-search",
+      "observed_ids": [
+        "shared-route"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "shared-id-tenant-separation",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "shared-id-tenant-separation.e4.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 5,
+      "expected_ids": [
+        "shared-route"
+      ],
+      "failures": [],
+      "id": "north-positive-control-get",
+      "observed_ids": [
+        "shared-route"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "shared-id-tenant-separation",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "shared-id-tenant-separation.e5.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 6,
+      "expected_ids": [],
+      "failures": [],
+      "id": "foreign-id-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "tenant",
+      "retention_excluded_ids": [],
+      "scenario": "shared-id-tenant-separation",
+      "tenant_id": "westwind",
+      "trace_refs": [
+        "shared-id-tenant-separation.e6.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 7,
+      "expected_ids": [],
+      "failures": [],
+      "id": "foreign-subject-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "tenant",
+      "retention_excluded_ids": [],
+      "scenario": "shared-id-tenant-separation",
+      "tenant_id": "westwind",
+      "trace_refs": [
+        "shared-id-tenant-separation.e7.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 2,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 9,
+      "expected": {
+        "evidence_ids": [
+          "shared-route"
+        ],
+        "status": "answer",
+        "value": "south-queue"
+      },
+      "failures": [],
+      "id": "south-route-after-north-delete",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "shared-route"
+        ],
+        "status": "answer",
+        "value": "south-queue"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "shared-id-tenant-separation",
+      "task": {
+        "description": "Which south tenant queue remains after the north tenant deletes its shared ID?",
+        "key": "support-queue",
+        "subject": "fictional-ava"
+      },
+      "tenant_id": "southwind",
+      "trace_refs": [
+        "shared-id-tenant-separation.e9.r0",
+        "shared-id-tenant-separation.e9.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 2,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 10,
+      "expected_ids": [],
+      "failures": [],
+      "id": "north-deleted-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "shared-id-tenant-separation",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "shared-id-tenant-separation.e10.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 2,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 11,
+      "expected_ids": [],
+      "failures": [],
+      "id": "north-deleted-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "deleted",
+      "retention_excluded_ids": [],
+      "scenario": "shared-id-tenant-separation",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "shared-id-tenant-separation.e11.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected": {
+        "evidence_ids": [
+          "shared-contact"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "north-positive",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "shared-contact"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "foreign-delete-is-no-op",
+      "task": {
+        "description": "Which north tenant contact applies?",
+        "key": "contact-channel",
+        "subject": "fictional-jules"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "foreign-delete-is-no-op.e2.r0",
+        "foreign-delete-is-no-op.e2.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected": {
+        "evidence_ids": [
+          "shared-contact"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "failures": [],
+      "id": "south-positive",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "shared-contact"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "foreign-delete-is-no-op",
+      "task": {
+        "description": "Which south tenant contact applies?",
+        "key": "contact-channel",
+        "subject": "fictional-jules"
+      },
+      "tenant_id": "southwind",
+      "trace_refs": [
+        "foreign-delete-is-no-op.e3.r0",
+        "foreign-delete-is-no-op.e3.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 2,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 5,
+      "expected": {
+        "evidence_ids": [
+          "shared-contact"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "north-after-foreign-delete",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "shared-contact"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "foreign-delete-is-no-op",
+      "task": {
+        "description": "Which north contact remains after a foreign delete?",
+        "key": "contact-channel",
+        "subject": "fictional-jules"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "foreign-delete-is-no-op.e5.r0",
+        "foreign-delete-is-no-op.e5.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 2,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 6,
+      "expected": {
+        "evidence_ids": [
+          "shared-contact"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "failures": [],
+      "id": "south-after-foreign-delete",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "shared-contact"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "foreign-delete-is-no-op",
+      "task": {
+        "description": "Which south contact remains after a foreign delete?",
+        "key": "contact-channel",
+        "subject": "fictional-jules"
+      },
+      "tenant_id": "southwind",
+      "trace_refs": [
+        "foreign-delete-is-no-op.e6.r0",
+        "foreign-delete-is-no-op.e6.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 2,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 7,
+      "expected_ids": [],
+      "failures": [],
+      "id": "foreign-invisible-search",
+      "observed_ids": [],
+      "passed": true,
+      "path": "search",
+      "reason": "tenant",
+      "retention_excluded_ids": [],
+      "scenario": "foreign-delete-is-no-op",
+      "tenant_id": "westwind",
+      "trace_refs": [
+        "foreign-delete-is-no-op.e7.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 2,
+      "category": "tenant",
+      "contract_violations": [],
+      "event_index": 8,
+      "expected_ids": [],
+      "failures": [],
+      "id": "foreign-invisible-get",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "tenant",
+      "retention_excluded_ids": [],
+      "scenario": "foreign-delete-is-no-op",
+      "tenant_id": "westwind",
+      "trace_refs": [
+        "foreign-delete-is-no-op.e8.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "stale",
+      "contract_violations": [],
+      "event_index": 1,
+      "expected": {
+        "evidence_ids": [
+          "earlier-queue"
+        ],
+        "status": "answer",
+        "value": "trial-support"
+      },
+      "failures": [],
+      "id": "original-queue",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "earlier-queue"
+        ],
+        "status": "answer",
+        "value": "trial-support"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "chronological-update",
+      "task": {
+        "description": "Which queue applies before the update?",
+        "key": "support-queue",
+        "subject": "fictional-update"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "chronological-update.e1.r0",
+        "chronological-update.e1.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 10,
+      "category": "stale",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected": {
+        "evidence_ids": [
+          "current-queue"
+        ],
+        "status": "answer",
+        "value": "core-support"
+      },
+      "failures": [],
+      "id": "updated-queue",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "current-queue"
+        ],
+        "status": "answer",
+        "value": "core-support"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "chronological-update",
+      "task": {
+        "description": "Which updated queue is current?",
+        "key": "support-queue",
+        "subject": "fictional-update"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "chronological-update.e3.r0",
+        "chronological-update.e3.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 10,
+      "category": "stale",
+      "contract_violations": [],
+      "event_index": 1,
+      "expected": {
+        "evidence_ids": [
+          "current-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "before-history",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "current-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "late-arriving-historical-fact",
+      "task": {
+        "description": "Which contact channel is current before delayed history arrives?",
+        "key": "contact-channel",
+        "subject": "fictional-delayed-history"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "late-arriving-historical-fact.e1.r0",
+        "late-arriving-historical-fact.e1.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 20,
+      "category": "stale",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected": {
+        "evidence_ids": [
+          "current-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "after-history",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "current-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "late-arriving-historical-fact",
+      "task": {
+        "description": "Which channel is current when an older historical statement arrives late?",
+        "key": "contact-channel",
+        "subject": "fictional-delayed-history"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "late-arriving-historical-fact.e3.r0",
+        "late-arriving-historical-fact.e3.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 9,
+      "category": "stale",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected": {
+        "evidence_ids": [
+          "present-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "not-effective-yet",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "present-channel"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "future-effective-update",
+      "task": {
+        "description": "Which channel applies before the scheduled change?",
+        "key": "contact-channel",
+        "subject": "fictional-scheduled-update"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "future-effective-update.e2.r0",
+        "future-effective-update.e2.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 9,
+      "category": "stale",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [],
+      "failures": [],
+      "id": "future-get-hidden",
+      "observed_ids": [],
+      "passed": true,
+      "path": "get",
+      "reason": "future",
+      "retention_excluded_ids": [],
+      "scenario": "future-effective-update",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "future-effective-update.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 9,
+      "category": "stale",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected_ids": [
+        "present-channel"
+      ],
+      "failures": [],
+      "id": "future-search-hidden",
+      "observed_ids": [
+        "present-channel"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "future-effective-update",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "future-effective-update.e4.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 10,
+      "category": "stale",
+      "contract_violations": [],
+      "event_index": 5,
+      "expected": {
+        "evidence_ids": [
+          "scheduled-channel"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "failures": [],
+      "id": "now-effective",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "scheduled-channel"
+        ],
+        "status": "answer",
+        "value": "voice"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "future-effective-update",
+      "task": {
+        "description": "Which channel applies exactly when the scheduled change becomes effective?",
+        "key": "contact-channel",
+        "subject": "fictional-scheduled-update"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "future-effective-update.e5.r0",
+        "future-effective-update.e5.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected": {
+        "evidence_ids": [
+          "claim-a",
+          "claim-b"
+        ],
+        "status": "conflict",
+        "value": null
+      },
+      "failures": [],
+      "id": "unresolved-tie",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "claim-a",
+          "claim-b"
+        ],
+        "status": "conflict",
+        "value": null
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "tied-conflicting-claims",
+      "task": {
+        "description": "Do the same-time incompatible claims support a single channel?",
+        "key": "contact-channel",
+        "subject": "fictional-conflicting-contact"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "tied-conflicting-claims.e2.r0"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "claim-a",
+        "claim-b"
+      ],
+      "failures": [],
+      "id": "conflict-search-control",
+      "observed_ids": [
+        "claim-a",
+        "claim-b"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "tied-conflicting-claims",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "tied-conflicting-claims.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected_ids": [
+        "claim-a"
+      ],
+      "failures": [],
+      "id": "conflict-get-a",
+      "observed_ids": [
+        "claim-a"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "tied-conflicting-claims",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "tied-conflicting-claims.e4.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 5,
+      "expected_ids": [
+        "claim-b"
+      ],
+      "failures": [],
+      "id": "conflict-get-b",
+      "observed_ids": [
+        "claim-b"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "tied-conflicting-claims",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "tied-conflicting-claims.e5.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected": {
+        "evidence_ids": [
+          "agree-b"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "failures": [],
+      "id": "agreement",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "agree-b"
+        ],
+        "status": "answer",
+        "value": "email"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "agreeing-duplicate-claims",
+      "task": {
+        "description": "Which channel do matching same-time claims support?",
+        "key": "contact-channel",
+        "subject": "fictional-agreeing-contact"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "agreeing-duplicate-claims.e2.r0",
+        "agreeing-duplicate-claims.e2.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 1,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 3,
+      "expected_ids": [
+        "agree-a",
+        "agree-b"
+      ],
+      "failures": [],
+      "id": "agreement-search-control",
+      "observed_ids": [
+        "agree-a",
+        "agree-b"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "agreeing-duplicate-claims",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "agreeing-duplicate-claims.e3.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected_ids": [
+        "agree-b"
+      ],
+      "failures": [],
+      "id": "agreement-get-control",
+      "observed_ids": [
+        "agree-b"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "agreeing-duplicate-claims",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "agreeing-duplicate-claims.e4.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 1,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 2,
+      "expected": {
+        "evidence_ids": [
+          "unresolved-a",
+          "unresolved-b"
+        ],
+        "status": "conflict",
+        "value": null
+      },
+      "failures": [],
+      "id": "before-resolution",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "unresolved-a",
+          "unresolved-b"
+        ],
+        "status": "conflict",
+        "value": null
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "newer-fact-resolves-conflict",
+      "task": {
+        "description": "Is the same-time contact conflict still unresolved?",
+        "key": "contact-channel",
+        "subject": "fictional-resolved-contact"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "newer-fact-resolves-conflict.e2.r0"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 2,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 4,
+      "expected": {
+        "evidence_ids": [
+          "resolved-c"
+        ],
+        "status": "answer",
+        "value": "email-confirmed"
+      },
+      "failures": [],
+      "id": "after-resolution",
+      "observed": {
+        "error": null,
+        "evidence_ids": [
+          "resolved-c"
+        ],
+        "status": "answer",
+        "value": "email-confirmed"
+      },
+      "passed": true,
+      "retention_excluded_ids": [],
+      "scenario": "newer-fact-resolves-conflict",
+      "task": {
+        "description": "Which newer unambiguous contact fact resolves the conflict?",
+        "key": "contact-channel",
+        "subject": "fictional-resolved-contact"
+      },
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "newer-fact-resolves-conflict.e4.r0",
+        "newer-fact-resolves-conflict.e4.r1"
+      ],
+      "type": "task"
+    },
+    {
+      "at": 2,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 5,
+      "expected_ids": [
+        "resolved-c",
+        "unresolved-a",
+        "unresolved-b"
+      ],
+      "failures": [],
+      "id": "resolution-search-control",
+      "observed_ids": [
+        "resolved-c",
+        "unresolved-a",
+        "unresolved-b"
+      ],
+      "passed": true,
+      "path": "search",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "newer-fact-resolves-conflict",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "newer-fact-resolves-conflict.e5.r0"
+      ],
+      "type": "probe"
+    },
+    {
+      "at": 2,
+      "category": "conflict",
+      "contract_violations": [],
+      "event_index": 6,
+      "expected_ids": [
+        "resolved-c"
+      ],
+      "failures": [],
+      "id": "resolution-get-control",
+      "observed_ids": [
+        "resolved-c"
+      ],
+      "passed": true,
+      "path": "get",
+      "reason": "present",
+      "retention_excluded_ids": [],
+      "scenario": "newer-fact-resolves-conflict",
+      "tenant_id": "northwind",
+      "trace_refs": [
+        "newer-fact-resolves-conflict.e6.r0"
+      ],
+      "type": "probe"
+    }
+  ],
+  "execution_kind": "offline_mock",
+  "mock_agent_version": "1.0",
+  "passed": true,
+  "policy": "conservative",
+  "policy_version": "1.0",
+  "retention": "unbounded",
+  "retention_seconds": null,
+  "runtime": {
+    "python": "3.11.9",
+    "sqlite": "3.45.1"
+  },
+  "scenario_count": 16,
+  "schema_version": "1.0",
+  "sqlite_schema_version": 1,
+  "store_contract_version": "1.0",
+  "suite_id": "lifecycle-v1",
+  "suite_schema_version": "1.0",
+  "suite_sha256": "eb7af32157386fe1e8687c61c77432316c3d06b876b7a943b6b2d58574169e2f",
+  "summary": {
+    "confident_conflict_errors": 0,
+    "contract_violations": 0,
+    "passed": 87,
+    "positive_answers": {
+      "passed": 28,
+      "total": 28
+    },
+    "reopens": 2,
+    "required_abstentions": {
+      "passed": 8,
+      "total": 8
+    },
+    "retention_task_losses": 0,
+    "stale_answers": 0,
+    "tasks": {
+      "passed": 36,
+      "total": 36
+    },
+    "total": 87
+  },
+  "supported_paths": {
+    "get": {
+      "reads": 54,
+      "violations": {
+        "backend_error": 0,
+        "corrupt_payload": 0,
+        "deleted": 0,
+        "expired": 0,
+        "future": 0,
+        "tenant": 0,
+        "unexpected_record": 0
+      }
+    },
+    "search": {
+      "reads": 61,
+      "violations": {
+        "backend_error": 0,
+        "corrupt_payload": 0,
+        "deleted": 0,
+        "expired": 0,
+        "future": 0,
+        "tenant": 0,
+        "unexpected_record": 0
+      }
+    }
+  },
+  "tool_version": "0.2.0",
+  "trace_file": "trace.jsonl"
+}

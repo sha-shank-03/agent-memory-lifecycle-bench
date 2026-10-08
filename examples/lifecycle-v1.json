@@ -1,0 +1,1932 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "lifecycle-v1",
+  "fictional": true,
+  "scenarios": [
+    {
+      "id": "retained-preference",
+      "category": "retention",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "mira-channel",
+            "subject": "fictional-mira",
+            "key": "contact-channel",
+            "value": "email",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional preference"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "recent-preference",
+          "task": {
+            "subject": "fictional-mira",
+            "key": "contact-channel",
+            "description": "Which channel should the fictional support assistant use to contact Mira?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "mira-channel"
+            ]
+          }
+        },
+        {
+          "op": "query",
+          "at": 2592000,
+          "tenant": "northwind",
+          "id": "preference-after-thirty-days",
+          "task": {
+            "subject": "fictional-mira",
+            "key": "contact-channel",
+            "description": "Which channel should be used thirty simulated days later?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "mira-channel"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 2592000,
+          "tenant": "northwind",
+          "id": "retained-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-mira",
+            "key": "contact-channel"
+          },
+          "expected_ids": [
+            "mira-channel"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 2592000,
+          "tenant": "northwind",
+          "id": "retained-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "mira-channel"
+          },
+          "expected_ids": [
+            "mira-channel"
+          ],
+          "reason": "present"
+        }
+      ]
+    },
+    {
+      "id": "seven-day-boundary",
+      "category": "retention",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "elin-channel",
+            "subject": "fictional-elin",
+            "key": "contact-channel",
+            "value": "email",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 604799,
+          "tenant": "northwind",
+          "id": "before-window",
+          "task": {
+            "subject": "fictional-elin",
+            "key": "contact-channel",
+            "description": "Which fictional channel remains useful just before seven days?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "elin-channel"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 604799,
+          "tenant": "northwind",
+          "id": "before-window-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-elin",
+            "key": "contact-channel"
+          },
+          "expected_ids": [
+            "elin-channel"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 604799,
+          "tenant": "northwind",
+          "id": "before-window-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "elin-channel"
+          },
+          "expected_ids": [
+            "elin-channel"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "query",
+          "at": 604800,
+          "tenant": "northwind",
+          "id": "at-window",
+          "task": {
+            "subject": "fictional-elin",
+            "key": "contact-channel",
+            "description": "Which permanent preference is still true at seven days?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "elin-channel"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 604800,
+          "tenant": "northwind",
+          "id": "at-window-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-elin",
+            "key": "contact-channel"
+          },
+          "expected_ids": [
+            "elin-channel"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 604800,
+          "tenant": "northwind",
+          "id": "at-window-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "elin-channel"
+          },
+          "expected_ids": [
+            "elin-channel"
+          ],
+          "reason": "present"
+        }
+      ]
+    },
+    {
+      "id": "trial-expiration",
+      "category": "expiration",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "trial-route",
+            "subject": "fictional-ticket-42",
+            "key": "support-queue",
+            "value": "trial-support",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": 10,
+            "source": "authored fictional trial routing"
+          }
+        },
+        {
+          "op": "query",
+          "at": 9,
+          "tenant": "northwind",
+          "id": "route-before-expiry",
+          "task": {
+            "subject": "fictional-ticket-42",
+            "key": "support-queue",
+            "description": "Which support queue applies before the fictional trial route expires?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "trial-support",
+            "evidence_ids": [
+              "trial-route"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 9,
+          "tenant": "northwind",
+          "id": "before-expiry-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-ticket-42",
+            "key": "support-queue"
+          },
+          "expected_ids": [
+            "trial-route"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 9,
+          "tenant": "northwind",
+          "id": "before-expiry-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "trial-route"
+          },
+          "expected_ids": [
+            "trial-route"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "query",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "route-at-expiry",
+          "task": {
+            "subject": "fictional-ticket-42",
+            "key": "support-queue",
+            "description": "Which support queue is supported by active memory at the exact expiry boundary?"
+          },
+          "expected": {
+            "status": "unknown",
+            "value": null,
+            "evidence_ids": []
+          }
+        },
+        {
+          "op": "probe",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "at-expiry-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-ticket-42",
+            "key": "support-queue"
+          },
+          "expected_ids": [],
+          "reason": "expired"
+        },
+        {
+          "op": "probe",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "at-expiry-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "trial-route"
+          },
+          "expected_ids": [],
+          "reason": "expired"
+        },
+        {
+          "op": "probe",
+          "at": 11,
+          "tenant": "northwind",
+          "id": "after-expiry-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-ticket-42",
+            "key": "support-queue"
+          },
+          "expected_ids": [],
+          "reason": "expired"
+        },
+        {
+          "op": "probe",
+          "at": 11,
+          "tenant": "northwind",
+          "id": "after-expiry-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "trial-route"
+          },
+          "expected_ids": [],
+          "reason": "expired"
+        }
+      ]
+    },
+    {
+      "id": "expiry-after-reopen",
+      "category": "expiration",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "reopen-trial",
+            "subject": "fictional-case-expiry",
+            "key": "temporary-queue",
+            "value": "trial-support",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": 10,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "reopen-permanent",
+            "subject": "fictional-case-expiry",
+            "key": "permanent-queue",
+            "value": "core-support",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 9,
+          "tenant": "northwind",
+          "id": "before-cold-expiry",
+          "task": {
+            "subject": "fictional-case-expiry",
+            "key": "temporary-queue",
+            "description": "Which trial queue applies before reopening the store?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "trial-support",
+            "evidence_ids": [
+              "reopen-trial"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 9,
+          "tenant": "northwind",
+          "id": "before-cold-expiry-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-case-expiry",
+            "key": "temporary-queue"
+          },
+          "expected_ids": [
+            "reopen-trial"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 9,
+          "tenant": "northwind",
+          "id": "before-cold-expiry-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "reopen-trial"
+          },
+          "expected_ids": [
+            "reopen-trial"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "reopen",
+          "at": 10
+        },
+        {
+          "op": "query",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "cold-expired",
+          "task": {
+            "subject": "fictional-case-expiry",
+            "key": "temporary-queue",
+            "description": "Which active temporary queue survives exact expiry?"
+          },
+          "expected": {
+            "status": "unknown",
+            "value": null,
+            "evidence_ids": []
+          }
+        },
+        {
+          "op": "probe",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "cold-expired-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-case-expiry",
+            "key": "temporary-queue"
+          },
+          "expected_ids": [],
+          "reason": "expired"
+        },
+        {
+          "op": "probe",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "cold-expired-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "reopen-trial"
+          },
+          "expected_ids": [],
+          "reason": "expired"
+        },
+        {
+          "op": "query",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "cold-positive",
+          "task": {
+            "subject": "fictional-case-expiry",
+            "key": "permanent-queue",
+            "description": "Which permanent queue proves the reopened store retained useful state?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "core-support",
+            "evidence_ids": [
+              "reopen-permanent"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "expiry-identical-replay",
+      "category": "expiration",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "replayed-trial",
+            "subject": "fictional-case-replay",
+            "key": "queue",
+            "value": "trial-support",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": 10,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "replay-positive",
+          "task": {
+            "subject": "fictional-case-replay",
+            "key": "queue",
+            "description": "Which temporary queue can be retrieved before expiry?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "trial-support",
+            "evidence_ids": [
+              "replayed-trial"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "replay-positive-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-case-replay",
+            "key": "queue"
+          },
+          "expected_ids": [
+            "replayed-trial"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "replay-positive-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "replayed-trial"
+          },
+          "expected_ids": [
+            "replayed-trial"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "put",
+          "at": 10,
+          "tenant": "northwind",
+          "memory": {
+            "id": "replayed-trial",
+            "subject": "fictional-case-replay",
+            "key": "queue",
+            "value": "trial-support",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": 10,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "replay-expired",
+          "task": {
+            "subject": "fictional-case-replay",
+            "key": "queue",
+            "description": "Does identical delivery extend the original expiry?"
+          },
+          "expected": {
+            "status": "unknown",
+            "value": null,
+            "evidence_ids": []
+          }
+        },
+        {
+          "op": "probe",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "replay-expired-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-case-replay",
+            "key": "queue"
+          },
+          "expected_ids": [],
+          "reason": "expired"
+        },
+        {
+          "op": "probe",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "replay-expired-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "replayed-trial"
+          },
+          "expected_ids": [],
+          "reason": "expired"
+        }
+      ]
+    },
+    {
+      "id": "forgotten-callback",
+      "category": "deletion",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "eastwind",
+          "memory": {
+            "id": "noah-callback",
+            "subject": "fictional-noah",
+            "key": "callback-channel",
+            "value": "voice",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional callback request"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "eastwind",
+          "id": "callback-before-delete",
+          "task": {
+            "subject": "fictional-noah",
+            "key": "callback-channel",
+            "description": "Which callback channel has fictional Noah requested?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "voice",
+            "evidence_ids": [
+              "noah-callback"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "eastwind",
+          "id": "before-delete-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-noah",
+            "key": "callback-channel"
+          },
+          "expected_ids": [
+            "noah-callback"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "eastwind",
+          "id": "before-delete-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "noah-callback"
+          },
+          "expected_ids": [
+            "noah-callback"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "delete",
+          "at": 2,
+          "tenant": "eastwind",
+          "memory_id": "noah-callback"
+        },
+        {
+          "op": "query",
+          "at": 2,
+          "tenant": "eastwind",
+          "id": "callback-after-delete",
+          "task": {
+            "subject": "fictional-noah",
+            "key": "callback-channel",
+            "description": "Which callback channel remains retrievable after forgetting that request?"
+          },
+          "expected": {
+            "status": "unknown",
+            "value": null,
+            "evidence_ids": []
+          }
+        },
+        {
+          "op": "probe",
+          "at": 2,
+          "tenant": "eastwind",
+          "id": "at-delete-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-noah",
+            "key": "callback-channel"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        },
+        {
+          "op": "probe",
+          "at": 2,
+          "tenant": "eastwind",
+          "id": "at-delete-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "noah-callback"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        },
+        {
+          "op": "probe",
+          "at": 3,
+          "tenant": "eastwind",
+          "id": "after-delete-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-noah",
+            "key": "callback-channel"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        },
+        {
+          "op": "probe",
+          "at": 3,
+          "tenant": "eastwind",
+          "id": "after-delete-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "noah-callback"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        }
+      ]
+    },
+    {
+      "id": "deletion-after-reopen",
+      "category": "deletion",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "cold-forgotten",
+            "subject": "fictional-remo",
+            "key": "callback-channel",
+            "value": "voice",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "cold-kept",
+            "subject": "fictional-remo",
+            "key": "support-queue",
+            "value": "core-support",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "cold-before-delete",
+          "task": {
+            "subject": "fictional-remo",
+            "key": "callback-channel",
+            "description": "Which callback channel exists before forgetting it?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "voice",
+            "evidence_ids": [
+              "cold-forgotten"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "cold-before-delete-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-remo",
+            "key": "callback-channel"
+          },
+          "expected_ids": [
+            "cold-forgotten"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "cold-before-delete-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "cold-forgotten"
+          },
+          "expected_ids": [
+            "cold-forgotten"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "delete",
+          "at": 2,
+          "tenant": "northwind",
+          "memory_id": "cold-forgotten"
+        },
+        {
+          "op": "reopen",
+          "at": 3
+        },
+        {
+          "op": "query",
+          "at": 3,
+          "tenant": "northwind",
+          "id": "cold-after-delete",
+          "task": {
+            "subject": "fictional-remo",
+            "key": "callback-channel",
+            "description": "Does the reopened supported path still exclude the forgotten callback?"
+          },
+          "expected": {
+            "status": "unknown",
+            "value": null,
+            "evidence_ids": []
+          }
+        },
+        {
+          "op": "probe",
+          "at": 3,
+          "tenant": "northwind",
+          "id": "cold-after-delete-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-remo",
+            "key": "callback-channel"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        },
+        {
+          "op": "probe",
+          "at": 3,
+          "tenant": "northwind",
+          "id": "cold-after-delete-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "cold-forgotten"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        },
+        {
+          "op": "query",
+          "at": 3,
+          "tenant": "northwind",
+          "id": "cold-kept-control",
+          "task": {
+            "subject": "fictional-remo",
+            "key": "support-queue",
+            "description": "Which retained queue proves reopening did not simply empty the store?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "core-support",
+            "evidence_ids": [
+              "cold-kept"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "delete-idempotency-and-replay",
+      "category": "deletion",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "old-callback",
+            "subject": "fictional-lian",
+            "key": "callback-channel",
+            "value": "voice",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "before-replayed-delete",
+          "task": {
+            "subject": "fictional-lian",
+            "key": "callback-channel",
+            "description": "Which fictional callback is available before deletion?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "voice",
+            "evidence_ids": [
+              "old-callback"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "before-replayed-delete-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-lian",
+            "key": "callback-channel"
+          },
+          "expected_ids": [
+            "old-callback"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "before-replayed-delete-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "old-callback"
+          },
+          "expected_ids": [
+            "old-callback"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "delete",
+          "at": 2,
+          "tenant": "northwind",
+          "memory_id": "old-callback"
+        },
+        {
+          "op": "delete",
+          "at": 2,
+          "tenant": "northwind",
+          "memory_id": "old-callback"
+        },
+        {
+          "op": "put",
+          "at": 3,
+          "tenant": "northwind",
+          "memory": {
+            "id": "old-callback",
+            "subject": "fictional-lian",
+            "key": "callback-channel",
+            "value": "voice",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 3,
+          "tenant": "northwind",
+          "id": "after-replayed-delete",
+          "task": {
+            "subject": "fictional-lian",
+            "key": "callback-channel",
+            "description": "Can an identical replay resurrect the deleted identity?"
+          },
+          "expected": {
+            "status": "unknown",
+            "value": null,
+            "evidence_ids": []
+          }
+        },
+        {
+          "op": "probe",
+          "at": 3,
+          "tenant": "northwind",
+          "id": "after-replayed-delete-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-lian",
+            "key": "callback-channel"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        },
+        {
+          "op": "probe",
+          "at": 3,
+          "tenant": "northwind",
+          "id": "after-replayed-delete-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "old-callback"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        },
+        {
+          "op": "put",
+          "at": 4,
+          "tenant": "northwind",
+          "memory": {
+            "id": "new-callback",
+            "subject": "fictional-lian",
+            "key": "callback-channel",
+            "value": "email",
+            "recorded_at": 4,
+            "effective_at": 4,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 4,
+          "tenant": "northwind",
+          "id": "legitimate-new-id",
+          "task": {
+            "subject": "fictional-lian",
+            "key": "callback-channel",
+            "description": "Which new legitimate request can be used without restoring the old identity?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "new-callback"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "shared-id-tenant-separation",
+      "category": "tenant",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "shared-route",
+            "subject": "fictional-ava",
+            "key": "support-queue",
+            "value": "north-queue",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional north tenant route"
+          }
+        },
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "southwind",
+          "memory": {
+            "id": "shared-route",
+            "subject": "fictional-ava",
+            "key": "support-queue",
+            "value": "south-queue",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional south tenant route"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "north-tenant-route",
+          "task": {
+            "subject": "fictional-ava",
+            "key": "support-queue",
+            "description": "Which queue belongs to fictional Ava in the north tenant?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "north-queue",
+            "evidence_ids": [
+              "shared-route"
+            ]
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "southwind",
+          "id": "south-tenant-route",
+          "task": {
+            "subject": "fictional-ava",
+            "key": "support-queue",
+            "description": "Which queue belongs to fictional Ava in the south tenant?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "south-queue",
+            "evidence_ids": [
+              "shared-route"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "north-positive-control-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-ava",
+            "key": "support-queue"
+          },
+          "expected_ids": [
+            "shared-route"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "north-positive-control-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "shared-route"
+          },
+          "expected_ids": [
+            "shared-route"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "westwind",
+          "id": "foreign-id-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "shared-route"
+          },
+          "expected_ids": [],
+          "reason": "tenant"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "westwind",
+          "id": "foreign-subject-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-ava",
+            "key": "support-queue"
+          },
+          "expected_ids": [],
+          "reason": "tenant"
+        },
+        {
+          "op": "delete",
+          "at": 2,
+          "tenant": "northwind",
+          "memory_id": "shared-route"
+        },
+        {
+          "op": "query",
+          "at": 2,
+          "tenant": "southwind",
+          "id": "south-route-after-north-delete",
+          "task": {
+            "subject": "fictional-ava",
+            "key": "support-queue",
+            "description": "Which south tenant queue remains after the north tenant deletes its shared ID?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "south-queue",
+            "evidence_ids": [
+              "shared-route"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 2,
+          "tenant": "northwind",
+          "id": "north-deleted-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "shared-route"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        },
+        {
+          "op": "probe",
+          "at": 2,
+          "tenant": "northwind",
+          "id": "north-deleted-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-ava",
+            "key": "support-queue"
+          },
+          "expected_ids": [],
+          "reason": "deleted"
+        }
+      ]
+    },
+    {
+      "id": "foreign-delete-is-no-op",
+      "category": "tenant",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "shared-contact",
+            "subject": "fictional-jules",
+            "key": "contact-channel",
+            "value": "email",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "southwind",
+          "memory": {
+            "id": "shared-contact",
+            "subject": "fictional-jules",
+            "key": "contact-channel",
+            "value": "voice",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "north-positive",
+          "task": {
+            "subject": "fictional-jules",
+            "key": "contact-channel",
+            "description": "Which north tenant contact applies?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "shared-contact"
+            ]
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "southwind",
+          "id": "south-positive",
+          "task": {
+            "subject": "fictional-jules",
+            "key": "contact-channel",
+            "description": "Which south tenant contact applies?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "voice",
+            "evidence_ids": [
+              "shared-contact"
+            ]
+          }
+        },
+        {
+          "op": "delete",
+          "at": 2,
+          "tenant": "westwind",
+          "memory_id": "shared-contact"
+        },
+        {
+          "op": "query",
+          "at": 2,
+          "tenant": "northwind",
+          "id": "north-after-foreign-delete",
+          "task": {
+            "subject": "fictional-jules",
+            "key": "contact-channel",
+            "description": "Which north contact remains after a foreign delete?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "shared-contact"
+            ]
+          }
+        },
+        {
+          "op": "query",
+          "at": 2,
+          "tenant": "southwind",
+          "id": "south-after-foreign-delete",
+          "task": {
+            "subject": "fictional-jules",
+            "key": "contact-channel",
+            "description": "Which south contact remains after a foreign delete?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "voice",
+            "evidence_ids": [
+              "shared-contact"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 2,
+          "tenant": "westwind",
+          "id": "foreign-invisible-search",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-jules",
+            "key": "contact-channel"
+          },
+          "expected_ids": [],
+          "reason": "tenant"
+        },
+        {
+          "op": "probe",
+          "at": 2,
+          "tenant": "westwind",
+          "id": "foreign-invisible-get",
+          "path": "get",
+          "inputs": {
+            "memory_id": "shared-contact"
+          },
+          "expected_ids": [],
+          "reason": "tenant"
+        }
+      ]
+    },
+    {
+      "id": "chronological-update",
+      "category": "stale",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "earlier-queue",
+            "subject": "fictional-update",
+            "key": "support-queue",
+            "value": "trial-support",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "original-queue",
+          "task": {
+            "subject": "fictional-update",
+            "key": "support-queue",
+            "description": "Which queue applies before the update?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "trial-support",
+            "evidence_ids": [
+              "earlier-queue"
+            ]
+          }
+        },
+        {
+          "op": "put",
+          "at": 10,
+          "tenant": "northwind",
+          "memory": {
+            "id": "current-queue",
+            "subject": "fictional-update",
+            "key": "support-queue",
+            "value": "core-support",
+            "recorded_at": 10,
+            "effective_at": 10,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "updated-queue",
+          "task": {
+            "subject": "fictional-update",
+            "key": "support-queue",
+            "description": "Which updated queue is current?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "core-support",
+            "evidence_ids": [
+              "current-queue"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "late-arriving-historical-fact",
+      "category": "stale",
+      "events": [
+        {
+          "op": "put",
+          "at": 10,
+          "tenant": "northwind",
+          "memory": {
+            "id": "current-channel",
+            "subject": "fictional-delayed-history",
+            "key": "contact-channel",
+            "value": "email",
+            "recorded_at": 10,
+            "effective_at": 10,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "before-history",
+          "task": {
+            "subject": "fictional-delayed-history",
+            "key": "contact-channel",
+            "description": "Which contact channel is current before delayed history arrives?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "current-channel"
+            ]
+          }
+        },
+        {
+          "op": "put",
+          "at": 20,
+          "tenant": "northwind",
+          "memory": {
+            "id": "late-history",
+            "subject": "fictional-delayed-history",
+            "key": "contact-channel",
+            "value": "voice",
+            "recorded_at": 20,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 20,
+          "tenant": "northwind",
+          "id": "after-history",
+          "task": {
+            "subject": "fictional-delayed-history",
+            "key": "contact-channel",
+            "description": "Which channel is current when an older historical statement arrives late?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "current-channel"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "future-effective-update",
+      "category": "stale",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "present-channel",
+            "subject": "fictional-scheduled-update",
+            "key": "contact-channel",
+            "value": "email",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "put",
+          "at": 1,
+          "tenant": "northwind",
+          "memory": {
+            "id": "scheduled-channel",
+            "subject": "fictional-scheduled-update",
+            "key": "contact-channel",
+            "value": "voice",
+            "recorded_at": 1,
+            "effective_at": 10,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 9,
+          "tenant": "northwind",
+          "id": "not-effective-yet",
+          "task": {
+            "subject": "fictional-scheduled-update",
+            "key": "contact-channel",
+            "description": "Which channel applies before the scheduled change?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "present-channel"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 9,
+          "tenant": "northwind",
+          "id": "future-get-hidden",
+          "path": "get",
+          "inputs": {
+            "memory_id": "scheduled-channel"
+          },
+          "expected_ids": [],
+          "reason": "future"
+        },
+        {
+          "op": "probe",
+          "at": 9,
+          "tenant": "northwind",
+          "id": "future-search-hidden",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-scheduled-update",
+            "key": "contact-channel"
+          },
+          "expected_ids": [
+            "present-channel"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "query",
+          "at": 10,
+          "tenant": "northwind",
+          "id": "now-effective",
+          "task": {
+            "subject": "fictional-scheduled-update",
+            "key": "contact-channel",
+            "description": "Which channel applies exactly when the scheduled change becomes effective?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "voice",
+            "evidence_ids": [
+              "scheduled-channel"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tied-conflicting-claims",
+      "category": "conflict",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "claim-a",
+            "subject": "fictional-conflicting-contact",
+            "key": "contact-channel",
+            "value": "email",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "claim-b",
+            "subject": "fictional-conflicting-contact",
+            "key": "contact-channel",
+            "value": "voice",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "unresolved-tie",
+          "task": {
+            "subject": "fictional-conflicting-contact",
+            "key": "contact-channel",
+            "description": "Do the same-time incompatible claims support a single channel?"
+          },
+          "expected": {
+            "status": "conflict",
+            "value": null,
+            "evidence_ids": [
+              "claim-a",
+              "claim-b"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "conflict-search-control",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-conflicting-contact",
+            "key": "contact-channel"
+          },
+          "expected_ids": [
+            "claim-a",
+            "claim-b"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "conflict-get-a",
+          "path": "get",
+          "inputs": {
+            "memory_id": "claim-a"
+          },
+          "expected_ids": [
+            "claim-a"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "conflict-get-b",
+          "path": "get",
+          "inputs": {
+            "memory_id": "claim-b"
+          },
+          "expected_ids": [
+            "claim-b"
+          ],
+          "reason": "present"
+        }
+      ]
+    },
+    {
+      "id": "agreeing-duplicate-claims",
+      "category": "conflict",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "agree-a",
+            "subject": "fictional-agreeing-contact",
+            "key": "contact-channel",
+            "value": "email",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "agree-b",
+            "subject": "fictional-agreeing-contact",
+            "key": "contact-channel",
+            "value": "email",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "agreement",
+          "task": {
+            "subject": "fictional-agreeing-contact",
+            "key": "contact-channel",
+            "description": "Which channel do matching same-time claims support?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email",
+            "evidence_ids": [
+              "agree-b"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "agreement-search-control",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-agreeing-contact",
+            "key": "contact-channel"
+          },
+          "expected_ids": [
+            "agree-a",
+            "agree-b"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "agreement-get-control",
+          "path": "get",
+          "inputs": {
+            "memory_id": "agree-b"
+          },
+          "expected_ids": [
+            "agree-b"
+          ],
+          "reason": "present"
+        }
+      ]
+    },
+    {
+      "id": "newer-fact-resolves-conflict",
+      "category": "conflict",
+      "events": [
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "unresolved-a",
+            "subject": "fictional-resolved-contact",
+            "key": "contact-channel",
+            "value": "email",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "put",
+          "at": 0,
+          "tenant": "northwind",
+          "memory": {
+            "id": "unresolved-b",
+            "subject": "fictional-resolved-contact",
+            "key": "contact-channel",
+            "value": "voice",
+            "recorded_at": 0,
+            "effective_at": 0,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 1,
+          "tenant": "northwind",
+          "id": "before-resolution",
+          "task": {
+            "subject": "fictional-resolved-contact",
+            "key": "contact-channel",
+            "description": "Is the same-time contact conflict still unresolved?"
+          },
+          "expected": {
+            "status": "conflict",
+            "value": null,
+            "evidence_ids": [
+              "unresolved-a",
+              "unresolved-b"
+            ]
+          }
+        },
+        {
+          "op": "put",
+          "at": 2,
+          "tenant": "northwind",
+          "memory": {
+            "id": "resolved-c",
+            "subject": "fictional-resolved-contact",
+            "key": "contact-channel",
+            "value": "email-confirmed",
+            "recorded_at": 2,
+            "effective_at": 2,
+            "expires_at": null,
+            "source": "authored fictional lifecycle fact"
+          }
+        },
+        {
+          "op": "query",
+          "at": 2,
+          "tenant": "northwind",
+          "id": "after-resolution",
+          "task": {
+            "subject": "fictional-resolved-contact",
+            "key": "contact-channel",
+            "description": "Which newer unambiguous contact fact resolves the conflict?"
+          },
+          "expected": {
+            "status": "answer",
+            "value": "email-confirmed",
+            "evidence_ids": [
+              "resolved-c"
+            ]
+          }
+        },
+        {
+          "op": "probe",
+          "at": 2,
+          "tenant": "northwind",
+          "id": "resolution-search-control",
+          "path": "search",
+          "inputs": {
+            "subject": "fictional-resolved-contact",
+            "key": "contact-channel"
+          },
+          "expected_ids": [
+            "unresolved-a",
+            "unresolved-b",
+            "resolved-c"
+          ],
+          "reason": "present"
+        },
+        {
+          "op": "probe",
+          "at": 2,
+          "tenant": "northwind",
+          "id": "resolution-get-control",
+          "path": "get",
+          "inputs": {
+            "memory_id": "resolved-c"
+          },
+          "expected_ids": [
+            "resolved-c"
+          ],
+          "reason": "present"
+        }
+      ]
+    }
+  ]
+}

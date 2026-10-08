@@ -1,0 +1,474 @@
+{
+  "completed": true,
+  "configurations": [
+    {
+      "categories": {
+        "conflict": {
+          "probe": {
+            "passed": 7,
+            "total": 7
+          },
+          "task": {
+            "passed": 2,
+            "total": 4
+          }
+        },
+        "deletion": {
+          "probe": {
+            "passed": 14,
+            "total": 14
+          },
+          "task": {
+            "passed": 8,
+            "total": 8
+          }
+        },
+        "expiration": {
+          "probe": {
+            "passed": 14,
+            "total": 14
+          },
+          "task": {
+            "passed": 7,
+            "total": 7
+          }
+        },
+        "retention": {
+          "probe": {
+            "passed": 6,
+            "total": 6
+          },
+          "task": {
+            "passed": 4,
+            "total": 4
+          }
+        },
+        "stale": {
+          "probe": {
+            "passed": 2,
+            "total": 2
+          },
+          "task": {
+            "passed": 5,
+            "total": 6
+          }
+        },
+        "tenant": {
+          "probe": {
+            "passed": 8,
+            "total": 8
+          },
+          "task": {
+            "passed": 7,
+            "total": 7
+          }
+        }
+      },
+      "passed": false,
+      "policy": "last-write",
+      "retention_seconds": null,
+      "summary": {
+        "confident_conflict_errors": 2,
+        "contract_violations": 0,
+        "passed": 84,
+        "positive_answers": {
+          "passed": 27,
+          "total": 28
+        },
+        "reopens": 2,
+        "required_abstentions": {
+          "passed": 6,
+          "total": 8
+        },
+        "retention_task_losses": 0,
+        "stale_answers": 1,
+        "tasks": {
+          "passed": 33,
+          "total": 36
+        },
+        "total": 87
+      },
+      "supported_paths": {
+        "get": {
+          "reads": 56,
+          "violations": {
+            "backend_error": 0,
+            "corrupt_payload": 0,
+            "deleted": 0,
+            "expired": 0,
+            "future": 0,
+            "tenant": 0,
+            "unexpected_record": 0
+          }
+        },
+        "search": {
+          "reads": 61,
+          "violations": {
+            "backend_error": 0,
+            "corrupt_payload": 0,
+            "deleted": 0,
+            "expired": 0,
+            "future": 0,
+            "tenant": 0,
+            "unexpected_record": 0
+          }
+        }
+      }
+    },
+    {
+      "categories": {
+        "conflict": {
+          "probe": {
+            "passed": 7,
+            "total": 7
+          },
+          "task": {
+            "passed": 2,
+            "total": 4
+          }
+        },
+        "deletion": {
+          "probe": {
+            "passed": 14,
+            "total": 14
+          },
+          "task": {
+            "passed": 8,
+            "total": 8
+          }
+        },
+        "expiration": {
+          "probe": {
+            "passed": 14,
+            "total": 14
+          },
+          "task": {
+            "passed": 7,
+            "total": 7
+          }
+        },
+        "retention": {
+          "probe": {
+            "passed": 2,
+            "total": 6
+          },
+          "task": {
+            "passed": 2,
+            "total": 4
+          }
+        },
+        "stale": {
+          "probe": {
+            "passed": 2,
+            "total": 2
+          },
+          "task": {
+            "passed": 5,
+            "total": 6
+          }
+        },
+        "tenant": {
+          "probe": {
+            "passed": 8,
+            "total": 8
+          },
+          "task": {
+            "passed": 7,
+            "total": 7
+          }
+        }
+      },
+      "passed": false,
+      "policy": "short-window",
+      "retention_seconds": 604800,
+      "summary": {
+        "confident_conflict_errors": 2,
+        "contract_violations": 0,
+        "passed": 78,
+        "positive_answers": {
+          "passed": 25,
+          "total": 28
+        },
+        "reopens": 2,
+        "required_abstentions": {
+          "passed": 6,
+          "total": 8
+        },
+        "retention_task_losses": 2,
+        "stale_answers": 1,
+        "tasks": {
+          "passed": 31,
+          "total": 36
+        },
+        "total": 87
+      },
+      "supported_paths": {
+        "get": {
+          "reads": 54,
+          "violations": {
+            "backend_error": 0,
+            "corrupt_payload": 0,
+            "deleted": 0,
+            "expired": 0,
+            "future": 0,
+            "tenant": 0,
+            "unexpected_record": 0
+          }
+        },
+        "search": {
+          "reads": 61,
+          "violations": {
+            "backend_error": 0,
+            "corrupt_payload": 0,
+            "deleted": 0,
+            "expired": 0,
+            "future": 0,
+            "tenant": 0,
+            "unexpected_record": 0
+          }
+        }
+      }
+    },
+    {
+      "categories": {
+        "conflict": {
+          "probe": {
+            "passed": 7,
+            "total": 7
+          },
+          "task": {
+            "passed": 2,
+            "total": 4
+          }
+        },
+        "deletion": {
+          "probe": {
+            "passed": 14,
+            "total": 14
+          },
+          "task": {
+            "passed": 8,
+            "total": 8
+          }
+        },
+        "expiration": {
+          "probe": {
+            "passed": 14,
+            "total": 14
+          },
+          "task": {
+            "passed": 7,
+            "total": 7
+          }
+        },
+        "retention": {
+          "probe": {
+            "passed": 6,
+            "total": 6
+          },
+          "task": {
+            "passed": 4,
+            "total": 4
+          }
+        },
+        "stale": {
+          "probe": {
+            "passed": 2,
+            "total": 2
+          },
+          "task": {
+            "passed": 6,
+            "total": 6
+          }
+        },
+        "tenant": {
+          "probe": {
+            "passed": 8,
+            "total": 8
+          },
+          "task": {
+            "passed": 7,
+            "total": 7
+          }
+        }
+      },
+      "passed": false,
+      "policy": "valid-time",
+      "retention_seconds": null,
+      "summary": {
+        "confident_conflict_errors": 2,
+        "contract_violations": 0,
+        "passed": 85,
+        "positive_answers": {
+          "passed": 28,
+          "total": 28
+        },
+        "reopens": 2,
+        "required_abstentions": {
+          "passed": 6,
+          "total": 8
+        },
+        "retention_task_losses": 0,
+        "stale_answers": 0,
+        "tasks": {
+          "passed": 34,
+          "total": 36
+        },
+        "total": 87
+      },
+      "supported_paths": {
+        "get": {
+          "reads": 56,
+          "violations": {
+            "backend_error": 0,
+            "corrupt_payload": 0,
+            "deleted": 0,
+            "expired": 0,
+            "future": 0,
+            "tenant": 0,
+            "unexpected_record": 0
+          }
+        },
+        "search": {
+          "reads": 61,
+          "violations": {
+            "backend_error": 0,
+            "corrupt_payload": 0,
+            "deleted": 0,
+            "expired": 0,
+            "future": 0,
+            "tenant": 0,
+            "unexpected_record": 0
+          }
+        }
+      }
+    },
+    {
+      "categories": {
+        "conflict": {
+          "probe": {
+            "passed": 7,
+            "total": 7
+          },
+          "task": {
+            "passed": 4,
+            "total": 4
+          }
+        },
+        "deletion": {
+          "probe": {
+            "passed": 14,
+            "total": 14
+          },
+          "task": {
+            "passed": 8,
+            "total": 8
+          }
+        },
+        "expiration": {
+          "probe": {
+            "passed": 14,
+            "total": 14
+          },
+          "task": {
+            "passed": 7,
+            "total": 7
+          }
+        },
+        "retention": {
+          "probe": {
+            "passed": 6,
+            "total": 6
+          },
+          "task": {
+            "passed": 4,
+            "total": 4
+          }
+        },
+        "stale": {
+          "probe": {
+            "passed": 2,
+            "total": 2
+          },
+          "task": {
+            "passed": 6,
+            "total": 6
+          }
+        },
+        "tenant": {
+          "probe": {
+            "passed": 8,
+            "total": 8
+          },
+          "task": {
+            "passed": 7,
+            "total": 7
+          }
+        }
+      },
+      "passed": true,
+      "policy": "conservative",
+      "retention_seconds": null,
+      "summary": {
+        "confident_conflict_errors": 0,
+        "contract_violations": 0,
+        "passed": 87,
+        "positive_answers": {
+          "passed": 28,
+          "total": 28
+        },
+        "reopens": 2,
+        "required_abstentions": {
+          "passed": 8,
+          "total": 8
+        },
+        "retention_task_losses": 0,
+        "stale_answers": 0,
+        "tasks": {
+          "passed": 36,
+          "total": 36
+        },
+        "total": 87
+      },
+      "supported_paths": {
+        "get": {
+          "reads": 54,
+          "violations": {
+            "backend_error": 0,
+            "corrupt_payload": 0,
+            "deleted": 0,
+            "expired": 0,
+            "future": 0,
+            "tenant": 0,
+            "unexpected_record": 0
+          }
+        },
+        "search": {
+          "reads": 61,
+          "violations": {
+            "backend_error": 0,
+            "corrupt_payload": 0,
+            "deleted": 0,
+            "expired": 0,
+            "future": 0,
+            "tenant": 0,
+            "unexpected_record": 0
+          }
+        }
+      }
+    }
+  ],
+  "excerpt_note": "Measurements copied from the actual comparison.json. Child report_file references are omitted because this example does not include the complete comparison output tree. Re-run compare for canonical reports and traces.",
+  "execution_kind": "offline_mock",
+  "kind": "recorded_comparison_summary_excerpt",
+  "passed": false,
+  "recorded_on": "2026-10-07",
+  "runtime": {
+    "python": "3.11.9",
+    "sqlite": "3.45.1"
+  },
+  "schema_version": "1.0",
+  "source_command": "py -3.11 scripts/verify_demo.py --out work/m2-verification",
+  "suite_id": "lifecycle-v1",
+  "suite_sha256": "eb7af32157386fe1e8687c61c77432316c3d06b876b7a943b6b2d58574169e2f"
+}
